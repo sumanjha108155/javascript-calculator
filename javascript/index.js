@@ -18,7 +18,7 @@ class Calculator {
 
     // function to append operator
     operatorconcat(operatortoconcat) {
-
+        let operators = /[+\-*/]/;
         if(this.previousInput.innerText == '' && this.currentInput.innerText.charAt(0) != 0 ) {
             if(this.currentInput.innerText == '') return
             else this.previousInput.innerText =  this.currentInput.innerText.toString() + operatortoconcat ;
@@ -28,15 +28,22 @@ class Calculator {
             this.previousInput.innerText =  this.currentInput.innerText.toString() + operatortoconcat ;
             this.currentInput.innerText = '';
 
-        } else{
-         this.previousInput.innerText =  this.previousInput.innerText.toString() + this.currentInput.innerText.toString() + operatortoconcat ;
+        } else if(this.currentInput.innerText.length == 0 && this.previousInput.innerText.length == 0 ) {
+            this.previousInput.innerText = '0' + operatortoconcat;
+
+        } else if(this.previousInput.innerText != '' && this.currentInput.innerText == '' && operators.test(this.previousInput.innerText)) {
+            let texttappend = this.previousInput.innerText.toString().slice(0, this.previousInput.innerText.length - 1 );
+            this.previousInput.innerText = texttappend + operatortoconcat;
+
+        } else {
+            this.previousInput.innerText =  this.previousInput.innerText.toString() + this.currentInput.innerText.toString() + operatortoconcat ;
         }
         this.currentInput.innerText = '';
     }
 
     // function to calculate the value
     equalsto() {
-        
+        let operators = /[+\-*/]/;
         if(this.previousInput.innerText.includes('^') && this.currentInput.innerText != '') {
             let num1 = this.previousInput.innerText.toString().slice(0, -1);
             let num2 = this.currentInput.innerText;
@@ -56,8 +63,16 @@ class Calculator {
             this.previousInput.innerText = '';
 
         }  else {
+           
+            
             if(this.currentInput.innerText != '' ) {
-                this.currentInput.innerText = Number.parseFloat(this.currentInput.innerText);
+
+                if(operators.test(this.currentInput.innerText)) {
+
+                } else {
+                    this.currentInput.innerText = Number.parseFloat(this.currentInput.innerText);
+                }
+                
                 this.expression = this.previousInput.innerText.toString() + this.currentInput.innerText.toString();
                 this.output = eval(this.expression);
                 this.currentInput.innerText = this.output;
@@ -223,11 +238,26 @@ class Calculator {
         }
     }
 
+    random() {
+        if(this.currentInput.innerText != '') {
+            this.currentInput.innerText = '';
+            this.currentInput.innerText = Math.random();
+        } else {
+            this.currentInput.innerText = Math.random();
+        }
+    }
     // function for any root calculation
     rootpower() {
         if(this.currentInput.innerText != '') {
             this.previousInput.innerText = this.currentInput.innerText + 'th root of ' ;
             this.currentInput.innerText = '';
+        }
+    }
+
+    // function to chaneg to expoential form
+    fe() {
+        if(this.currentInput.innerText != '') {
+            this.currentInput.innerText = this.currentInput.innerText.toString() + 'e+0';
         }
     }
 
@@ -378,6 +408,7 @@ const negate = document.querySelector('[data-negate]');
 const dot = document.querySelector('[data-dot]');
 const trifun = document.querySelectorAll('[data-trifun]');
 const roundoff = document.querySelectorAll('[data-roundoff]');
+const randomGen = document.querySelector('[data-random]');
 
 const memoryclear = document.querySelector('[data-memory-clear]');
 const memoryrecall = document.querySelector('[data-memory-recall]');
@@ -456,18 +487,9 @@ equalsto.addEventListener('click', () =>{
     calculator.equalsto();
 })
 
-let fetoken = 0;
+
 fe.addEventListener('click', () => {
-    if(fetoken == 0) {
-        fetoken = 1;
-        fe.style.borderBottom ="thin solid #2874f0";
-        currentInput.innerText = Number.parseFloat(currentInput.innerText).toExponential();
-       
-    } else if( fetoken == 1 ) {
-        fe.style.borderBottom = 'none';
-        fetoken = 0;
-    }
-    
+    calculator.fe();
 })
 
 // eventlistener to remove a number
@@ -560,3 +582,7 @@ negate.addEventListener('click' ,() => {
 dot.addEventListener('click' ,() => {
     calculator.concatnumber(dot.innerText);
 });
+
+randomGen.addEventListener('click', ()=>{
+    calculator.random();
+})
