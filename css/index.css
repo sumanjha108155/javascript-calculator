@@ -54,7 +54,7 @@ button:hover{
 }
 
 /* media queries for responsiveness */
-@media screen and (max-width:1400px) {
+@media screen (width >= 600px) and (max-width:1400px) {
     .calculator-container{
         width: 80%;
         font-size: 14px;
@@ -65,7 +65,7 @@ button:hover{
     }
 }
 
-@media screen and (max-width:1000px) {
+@media screen (width >= 1000px) and (max-width:1000px) {
     .calculator-container{
         width: 80%;
         height: 100%;
