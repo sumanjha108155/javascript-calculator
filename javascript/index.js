@@ -19,16 +19,16 @@ class Calculator {
     // function to append operator
     operatorconcat(operatortoconcat) {
         let operators = /[+\-*/]/;
-        if(this.previousInput.innerText == '' && this.currentInput.innerText.charAt(0) != 0 ) {
+        if(this.previousInput.innerText === '' && this.currentInput.innerText.charAt(0) !== 0 ) {
             if(this.currentInput.innerText == '') return
             else this.previousInput.innerText =  this.currentInput.innerText.toString() + operatortoconcat ;
 
-        } else if(this.currentInput.innerText.length > 1 && this.currentInput.innerText.charAt(0) == 0) {
+        } else if(this.currentInput.innerText.length > 1 && this.currentInput.innerText.charAt(0) === 0) {
             this.currentInput.innerText = Number.parseFloat(this.currentInput.innerText);
             this.previousInput.innerText =  this.currentInput.innerText.toString() + operatortoconcat ;
             this.currentInput.innerText = '';
 
-        } else if(this.currentInput.innerText.length == 0 && this.previousInput.innerText.length == 0 ) {
+        } else if(this.currentInput.innerText.length === 0 && this.previousInput.innerText.length === 0 ) {
             this.previousInput.innerText = '0' + operatortoconcat;
 
         } else if(this.previousInput.innerText != '' && this.currentInput.innerText == '' && operators.test(this.previousInput.innerText)) {
@@ -421,13 +421,13 @@ const secfuntion = document.getElementById("secondfunctionalitites");
 let token = 0;
 secfuntion.addEventListener('click', function(){
     
-    if(token == 0) {
+    if(token === 0) {
         secfuntion.style.backgroundColor = "#2874f0";
         secfuntion.style.color = "white";
         changehtmlcontent();
         itemsafterchange();
         token = 1;
-    } else if(token == 1) {
+    } else if(token === 1) {
         secfuntion.style.backgroundColor = "";
         secfuntion.style.color = "black";
         itemsafterchange();
@@ -442,7 +442,7 @@ const calculator = new Calculator(previousInput, currentInput);         // intia
 memorystore.addEventListener('click', () => {
     
     let flag = calculator.memoryfunctions('ms');
-    if(flag == 1) {
+    if(flag === 1) {
         memoryrecall.disabled = false;
         memoryclear.disabled = false;
         datamemory.disabled = false;
