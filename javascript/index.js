@@ -1,22 +1,20 @@
 class Calculator {
-
     constructor(previousInput, currentInput) {
         this.previousInput = previousInput;
         this.currentInput = currentInput;
     }
-
-    // function to append numbers 
-    concatnumber(texttoconcat) { 
-       
-        if(this.currentInput.innerText == Math.PI || this.currentInput.innerText == Math.E) {
+    
+    //function to append numbers 
+   concatnumber(texttoconcat) { 
+        if(this.currentInput.innerText == Math.PI||this.currentInput.innerText == Math.E) {
             this.currentInput.innerText = '';
         } else if(texttoconcat === '.' && this.currentInput.innerText.includes('.')) {
             return;
         } 
-        this.currentInput.innerText += texttoconcat;
+    this.currentInput.innerText += texttoconcat;
     }
 
-    // function to append operator
+    //function to append operator
     operatorconcat(operatortoconcat) {
         let operators = /[+\-*/]/;
         if(this.previousInput.innerText === '' && this.currentInput.innerText.charAt(0) !== 0 ) {
@@ -41,7 +39,7 @@ class Calculator {
         this.currentInput.innerText = '';
     }
 
-    // function to calculate the value
+    //function to calculate the value
     equalsto() {
         let operators = /[+\-*/]/;
         if(this.previousInput.innerText.includes('^') && this.currentInput.innerText != '') {
@@ -63,8 +61,6 @@ class Calculator {
             this.previousInput.innerText = '';
 
         }  else {
-           
-            
             if(this.currentInput.innerText != '' ) {
 
                 if(operators.test(this.currentInput.innerText)) {
@@ -72,7 +68,6 @@ class Calculator {
                 } else {
                     this.currentInput.innerText = Number.parseFloat(this.currentInput.innerText);
                 }
-                
                 this.expression = this.previousInput.innerText.toString() + this.currentInput.innerText.toString();
                 this.output = eval(this.expression);
                 this.currentInput.innerText = this.output;
@@ -102,28 +97,28 @@ class Calculator {
         }
     }
 
-    // function for 1/x division
+    //function for 1/x division
     oneby() {
         if(this.currentInput.innerText != '') {
             this.currentInput.innerText = (1/ this.currentInput.innerText);
         } 
     }
 
-    // fumction for absolute value
+    //fumction for absolute value
     absolute() {
         if(this.currentInput.innerText != '') {
             this.currentInput.innerText = Math.abs(this.currentInput.innerText);
         }
     }
 
-    // function to find the exponential notation 
+    //function to find the exponential notation 
     exponential() {
         if(this.currentInput.innerText != '') {
             this.currentInput.innerText = Number.parseFloat(this.currentInput.innerText).toExponential();
         }
     }
 
-    // function for square and cube root of a number
+    //function for square and cube root of a number
     sqandcbroot(type) {
         if(this.currentInput.innerText != '') {
             if(type=='square') {
@@ -134,7 +129,7 @@ class Calculator {
         }   
     }
 
-    // function to calculate the factorial of a number
+    //function to calculate the factorial of a number
     factorial() {
         if(this.currentInput.innerText != '') {
             if(this.currentInput.innerText.includes('-')) {
@@ -153,7 +148,7 @@ class Calculator {
        }   
     }
 
-    // function to raise a number by certain power
+    //function to raise a number by certain power
     powerraise(type) {
         if(type == 'normal') {
             if(this.currentInput.innerText != '') {
@@ -380,15 +375,12 @@ function reversehtmlcontent() {
 // variables to access the DOM elements
 const number = document.querySelectorAll('[data-number]');
 const operator = document.querySelectorAll('[data-operator]');
-
 const previousInput = document.querySelector('[data-previous-input]');
 const currentInput = document.querySelector('[data-current-input]');
-
 const equalsto = document.querySelector('[data-equalto]');
 const clear = document.querySelector('[data-clearall]');
 const remove = document.querySelector('[data-remove]');
 const fe = document.querySelector('[data-fe]');
-
 const pi = document.querySelector('[data-pi]');
 const exp = document.querySelector('[data-exponential-value]');
 const square = document.querySelector('[data-number-square]');
@@ -409,14 +401,12 @@ const dot = document.querySelector('[data-dot]');
 const trifun = document.querySelectorAll('[data-trifun]');
 const roundoff = document.querySelectorAll('[data-roundoff]');
 const randomGen = document.querySelector('[data-random]');
-
 const memoryclear = document.querySelector('[data-memory-clear]');
 const memoryrecall = document.querySelector('[data-memory-recall]');
 const memoryadd = document.querySelector('[data-memory-add]');
 const memorysub = document.querySelector('[data-memory-sub]');
 const memorystore = document.querySelector('[data-memory-store]');
 const datamemory = document.querySelector('[data-memory]');
-
 const secfuntion = document.getElementById("secondfunctionalitites");
 let token = 0;
 secfuntion.addEventListener('click', function(){
@@ -437,7 +427,6 @@ secfuntion.addEventListener('click', function(){
 });
 
 const calculator = new Calculator(previousInput, currentInput);         // intializing class object
-
 //event listener for memory functions
 memorystore.addEventListener('click', () => {
     
@@ -486,7 +475,6 @@ operator.forEach(button => {
 equalsto.addEventListener('click', () =>{
     calculator.equalsto();
 })
-
 
 fe.addEventListener('click', () => {
     calculator.fe();
